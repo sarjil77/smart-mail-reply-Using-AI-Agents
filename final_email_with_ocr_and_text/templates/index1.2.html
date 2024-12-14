@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Automation Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+        header .settings {
+            cursor: pointer;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        .summary-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        .summary-stats div {
+            font-size: 1.2rem;
+            color: #333;
+        }
+        .process-monitor {
+            margin-bottom: 20px;
+        }
+        .process-step {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        .process-step span {
+            margin-left: 10px;
+        }
+        .logs, .json-output, .key-info, .email-preview {
+            margin-bottom: 20px;
+        }
+        .logs pre, .json-output pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            max-height: 300px;
+            overflow-y: auto;
+            font-family: 'Courier New', Courier, monospace;
+            color: #333;
+        }
+        .key-info div {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+        .email-preview input, .email-preview textarea {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .email-preview button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .email-preview button:hover {
+            background-color: #0056b3;
+        }
+        .email-preview textarea {
+            height: 150px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo"><i class="bi bi-envelope-paper-fill"></i> Email Automation</div>
+        <h1>Email Automation Dashboard</h1>
+        <div class="settings"><i class="bi bi-gear"></i> Settings</div>
+    </header>
+
+    <div class="container">
+        <!-- Summary Statistics -->
+        <section class="summary-stats">
+            <div>Emails Processed: <span>###</span></div>
+            <div>Pending: <span>##</span></div>
+            <div>Errors: <span>##</span></div>
+            <div>Avg. Processing Time: <span>##s</span></div>
+            <div>Success Rate: <span>##%</span></div>
+        </section>
+
+        <!-- Live Process Monitoring -->
+        <section class="process-monitor">
+            <div class="process-step">
+                <span>Step 1: Fetching Emails</span> <span>[In Progress]</span> <span>[✓ Complete]</span>
+            </div>
+            <div class="process-step">
+                <span>Step 2: Classifying Emails</span> <span>[In Progress]</span> <span>[✓ Complete]</span>
+            </div>
+            <div class="process-step">
+                <span>Step 3: Sending Responses</span> <span>[In Progress]</span> <span>[✓ Complete]</span>
+            </div>
+            <button>Manual Run Script</button>
+        </section>
+
+        <!-- Logs -->
+        <section class="logs">
+            <h2>Logs</h2>
+            <pre>[ Real-time logs appear here. Colored for info, warnings, and errors. Timestamped log entries. ]</pre>
+        </section>
+
+        <!-- JSON Output Viewer -->
+        <section class="json-output">
+            <h2>JSON Output</h2>
+            <pre>[ JSON data displayed in a collapsible format. ]</pre>
+        </section>
+
+        <!-- Key Information Extraction -->
+        <section class="key-info">
+            <h2>Key Information</h2>
+            <div>Email ID: 12345</div>
+            <div>Classification: Policy Inquiry</div>
+            <div>Important Content: "..."</div>
+            <div>Attachments: [policy.pdf]</div>
+        </section>
+
+        <!-- Email Response Preview -->
+        <section class="email-preview">
+            <h2>Email Response Preview</h2>
+            <input type="text" placeholder="Subject: Email Subject Here">
+            <input type="text" placeholder="To: Recipient Email">
+            <textarea placeholder="Email body... Editable content..."></textarea>
+            <button>Send Email</button>
+        </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+</body>
+</html>

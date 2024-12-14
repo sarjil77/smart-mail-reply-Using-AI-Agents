@@ -1,0 +1,41 @@
+[
+    {
+        "ID": "1c0eb8cb-9c65-4895-9b63-620a794ab85a",
+        "From": "Sarjil Juneja <Sarjil.Juneja@injala.com>",
+        "Subject": "Testing mail",
+        "Received": "Fri, 12 Jul 2024 08:45:31 +0000",
+        "Content": "Hello how are you\r\n",
+        "Classifier Output": "Customer Support",
+        "Responder Output": "Hello, thank you for reaching out. How may I assist you today?",
+        "Attachments": {
+            "Images": [],
+            "PDFs": []
+        }
+    },
+    {
+        "ID": "399a4da6-172e-4a37-93b7-bf0077fabfd5",
+        "From": "juneja sarjil <sarjil177@gmail.com>",
+        "Subject": "Mail for testing of code",
+        "Received": "Fri, 12 Jul 2024 14:15:55 +0530",
+        "Content": "The line mail = imaplib.IMAP4_SSL(IMAP_SERVER) in Python is used to create\r\na secure connection to an IMAP (Internet Message Access Protocol) email\r\nserver. Let's break down what each part of this line does:\r\n\r\n   1.\r\n\r\n   *imaplib.IMAP4_SSL*: imaplib is a built-in Python module for accessing\r\n   IMAP mailboxes. IMAP4_SSL is a class within imaplib that establishes a\r\n   secure SSL/TLS connection to the IMAP server. This ensures that the\r\n   communication between your script and the server is encrypted, which is\r\n   crucial for handling sensitive information like email contents and\r\n   credentials securely.\r\n   2.\r\n\r\n   *IMAP_SERVER*: This is a variable that typically holds the address of\r\n   the IMAP server you want to connect to. In your example, it's set to '\r\n   imap.gmail.com', which is the IMAP server address for Gmail.\r\n   3.\r\n\r\n   *Usage*: When you create an instance of IMAP4_SSL, as in mail =\r\n   imaplib.IMAP4_SSL(IMAP_SERVER), you are establishing a connection to the\r\n   specified IMAP server (imap.gmail.com in this case) over SSL/TLS. This\r\n   instance (mail in your script) allows you to interact with the server to\r\n   perform operations like logging in, fetching emails, searching for\r\n   messages, and managing mailbox operations programmatically.\r\n\r\nKey Points:\r\n\r\n   -\r\n\r\n   *Security*: IMAP4_SSL ensures that all data exchanged between your\r\n   script and the server is encrypted, preventing unauthorized access to your\r\n   email data during transmission.\r\n   -\r\n\r\n   *IMAP Operations*: Once connected, you can use methods provided by the\r\n   imaplib module (like login(), select(), search(), fetch(), etc.) through\r\n   the mail object to interact with your mailbox programmatically.\r\n   -\r\n\r\n   *Authentication*: Typically, after establishing the connection, you\r\n   would authenticate using your email credentials (username and password) to\r\n   access your mailbox and perform operations like fetching emails, as shown\r\n   in your script.\r\n\r\nIn summary, mail = imaplib.IMAP4_SSL(IMAP_SERVER) initiates a secure\r\nconnection to the specified IMAP server, enabling your Python script to\r\ninteract with your email account programmatically using the IMAP protocol.\r\n",
+        "Classifier Output": "'Documentation'",
+        "Responder Output": "The line `mail = imaplib.IMAP4_SSL(IMAP_SERVER)` in Python creates a secure connection to an IMAP (Internet Message Access Protocol) email server. This is achieved through the following steps:\n\n1. *imaplib.IMAP4_SSL*: The `IMAP4_SSL` class within the `imaplib` module establishes a secure SSL/TLS connection to the IMAP server. This ensures that the communication between your script and the server is encrypted, which is crucial for handling sensitive information like email contents and credentials securely.\n2. *IMAP_SERVER*: This variable holds the address of the IMAP server you want to connect to. In this case, it's set to `'imap.gmail.com'`, which is the IMAP server address for Gmail.\n3. *Usage*: When creating an instance of `IMAP4_SSL`, as in `mail = imaplib.IMAP4_SSL(IMAP_SERVER)`, a connection to the specified IMAP server (`imap.gmail.com` in this case) over SSL/TLS is established. This instance (`mail` in your script) allows you to interact with the server to perform operations like logging in, fetching emails, searching for messages, and managing mailbox operations programmatically.\n\nThe key points of this operation are:\n\n* Security: `IMAP4_SSL` ensures that all data exchanged between your script and the server is encrypted, preventing unauthorized access to your email data during transmission.\n* IMAP Operations: Once connected, you can use methods provided by the `imaplib` module (like `login()`, `select()`, `search()`, `fetch()`, etc.) through the `mail` object to interact with your mailbox programmatically.\n* Authentication: Typically, after establishing the connection, you would authenticate using your email credentials (username and password) to access your mailbox and perform operations like fetching emails, as shown in your script.\n\nIn summary, the line `mail = imaplib.IMAP4_SSL(IMAP_SERVER)` initiates a secure connection to the specified IMAP server, enabling your Python script to interact with your email account programmatically using the IMAP protocol.",
+        "Attachments": {
+            "Images": [],
+            "PDFs": []
+        }
+    },
+    {
+        "ID": "c3f2d746-e966-4401-811f-3069fe932b4b",
+        "From": "Sarjil Juneja <Sarjil.Juneja@injala.com>",
+        "Subject": "Testing mail",
+        "Received": "Fri, 12 Jul 2024 08:46:17 +0000",
+        "Content": "HEyy Sarjil, wanna go out and have some coffee?\r\n\r\n\r\n",
+        "Classifier Output": "Customer Support.",
+        "Responder Output": "Dear [Client], thank you for reaching out. However, this email does not relate to any insurance or policy inquiry. If you'd like to discuss your insurance needs or have any questions about our policies, please feel free to contact us directly so we can assist you accordingly. Best regards, [Your Name]",
+        "Attachments": {
+            "Images": [],
+            "PDFs": []
+        }
+    }
+]

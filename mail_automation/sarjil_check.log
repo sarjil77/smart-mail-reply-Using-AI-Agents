@@ -1,0 +1,54 @@
+/data/aiuserinj/anaconda3/envs/AI_agents/lib/python3.11/site-packages/pydantic/_internal/_config.py:341: UserWarning: Valid config keys have changed in V2:
+* 'allow_population_by_field_name' has been renamed to 'populate_by_name'
+* 'smart_union' has been removed
+  warnings.warn(message, UserWarning)
+2024-08-14 16:36:49,161 - 140086489663296 - __init__.py-__init__:531 - WARNING: Overriding of current TracerProvider is not allowed
+2024-08-14 16:43:49,020 - 140086489663296 - __init__.py-__init__:531 - WARNING: Overriding of current TracerProvider is not allowed
+2024-08-14 16:44:00,225 - 140086489663296 - __init__.py-__init__:531 - WARNING: Overriding of current TracerProvider is not allowed
+Logging in...
+Logged in.
+Processing emails with attachments...
+Fetching unseen emails...
+Unseen emails fetched: [b'31']
+Processing email - Subject: Test all the attachments with this mail, From: juneja sarjil <sarjil177@gmail.com>
+Saving attachment: sbi_sample_pdf.pdf
+Attachment saved at: /data/aiuserinj/sarjil/mail_summarizer/handling_attachments/sbi_sample_pdf.pdf
+Saving attachment: coverages_ex.jpg
+Attachment saved at: /data/aiuserinj/sarjil/mail_summarizer/handling_attachments/coverages_ex.jpg
+Defining AI agents...
+Image files to process: ['/data/aiuserinj/sarjil/mail_summarizer/handling_attachments/coverages_ex.jpg']
+Extracting text from image: /data/aiuserinj/sarjil/mail_summarizer/handling_attachments/coverages_ex.jpg
+Extracted text from image: Policy Number
+GLD5491300
+COMMON POLICY DECLARATIONS
+HDI Global Insurance Company
+161 North Clark Str...
+PDF files to process: ['/data/aiuserinj/sarjil/mail_summarizer/handling_attachments/sbi_sample_pdf.pdf']
+Extracting text from PDF as images: /data/aiuserinj/sarjil/mail_summarizer/handling_attachments/sbi_sample_pdf.pdf
+Extracting text from image: /tmp/tmponcusakc/page_0.jpg
+Extracted text from image: Sample filled form
+Sr. No. EZ000001
+State Bank of India
+Pure Banking.
+Nothing else.
+INDOC No.
+With y...
+Extracting text from image: /tmp/tmponcusakc/page_1.jpg
+Extracted text from image: Sample filled form
+POWER OF ATTORNEY
+THIS POWER OF ATTORNEY executed at Mumbai
+/
+this 31st day of Ja...
+Extracted text from PDF: Sample filled form
+Sr. No. EZ000001
+State Bank of India
+Pure Banking.
+Nothing else.
+INDOC No.
+With y...
+Defining classifier task...
+Defining responder task...
+Saving all results to: /data/aiuserinj/sarjil/mail_summarizer/final_email_with_ocr_and_text/all_email_results.json
+Logging out...
+Logged out.
+Reply sent successfully.

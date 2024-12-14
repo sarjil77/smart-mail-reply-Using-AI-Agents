@@ -1,0 +1,22 @@
+[
+    {
+        "ID": "9d8ac65b-3216-4fe8-8966-0f7189c4456a",
+        "From": "juneja sarjil <sarjil177@gmail.com>",
+        "Subject": "checking if it is working with both text and attachments",
+        "Content": "Hi Sarjl,\n\nI want to have an update on how your task for automating email is going on,\nthe boss was asking about you and it is important so do it as soon as\npossible.",
+        "Classifier Output": {
+            "description": "classify the email: Hi Sarjl,\n\nI want to have an update on how your task for automating email is going on,\nthe boss was asking about you and it is important so do it as soon as\npossible.",
+            "summary": "classify the email: Hi Sarjl,\n\nI want to have an update...",
+            "exported_output": "important",
+            "agent": "email classifier",
+            "raw_output": "important"
+        },
+        "Responder Output": {
+            "description": "respond to the email: 'Hi Sarjl,\n\nI want to have an update on how your task for automating email is going on,\nthe boss was asking about you and it is important so do it as soon as\npossible.' based on the importance provided by the 'classifier' agent",
+            "summary": "respond to the email: 'Hi Sarjl,\n\nI want to have an...",
+            "exported_output": "Dear [Classifier],\n\nThank you for classifying this email as \"important\". Based on its importance, I will provide a formal response.\n\nDear Hi Sarjl,\n\nRegarding the update on automating emails, I am pleased to inform that our team is working diligently to complete the task. We are anticipating a timely completion and will keep you updated on any developments. Please be assured that we understand the urgency of this project and are committed to delivering it as soon as possible.\n\nBest regards,\n[Your Name]",
+            "agent": "email responder",
+            "raw_output": "Dear [Classifier],\n\nThank you for classifying this email as \"important\". Based on its importance, I will provide a formal response.\n\nDear Hi Sarjl,\n\nRegarding the update on automating emails, I am pleased to inform that our team is working diligently to complete the task. We are anticipating a timely completion and will keep you updated on any developments. Please be assured that we understand the urgency of this project and are committed to delivering it as soon as possible.\n\nBest regards,\n[Your Name]"
+        }
+    }
+]

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Automation Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='aug18.1.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Email Automation Dashboard</h1>
+        
+        <div class="dashboard">
+            <div class="kpi-card">
+                <h2>Total Unseen Mails</h2>
+                <p id="unseen-mails">Loading...</p>
+            </div>
+        </div>
+
+        <div class="email-details-section">
+            <h2>Email Details</h2>
+            <div class="filters">
+                <input type="text" id="filter-sender" placeholder="Filter by Sender">
+                <input type="text" id="filter-subject" placeholder="Filter by Subject">
+                <button id="apply-filters">Apply Filters</button>
+            </div>
+
+            <div id="email-details" class="email-details">
+                <!-- Email details will be inserted here dynamically -->
+            </div>
+
+            <div class="pagination">
+                <button id="prev-page" disabled>Previous</button>
+                <span id="page-info">Page 1</span>
+                <button id="next-page">Next</button>
+            </div>
+
+            <button id="refresh">Refresh Data</button>
+        </div>
+    </div>
+
+    <div id="email-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modal-email-content">Loading...</div>
+        </div>
+    </div>
+
+    <script>
+        let currentPage = 1;
+        let totalPages = 1;
+
+        function loadDashboardData() {
+            $.getJSON('/api/dashboard-data', function(data) {
+                $('#unseen-mails').text(data.unseen_mails);
+
+                loadEmails(currentPage);
+            });
+        }
+
+        function loadEmails(page) {
+            const senderFilter = $('#filter-sender').val();
+            const subjectFilter = $('#filter-subject').val();
+            
+            $.getJSON(`/api/emails?page=${page}&sender=${senderFilter}&subject=${subjectFilter}`, function(data) {
+                let emailDetailsHtml = '';
+                data.emails.forEach(function(email) {
+                    emailDetailsHtml += `
+                        <div class="email-card" data-email-id="${email.id}">
+                            <p><strong>Sender:</strong> ${email.from}</p>
+                            <p><strong>Subject:</strong> ${email.subject}</p>
+                            <p><strong>Received:</strong> ${email.date}</p>
+                            <p><strong>Content Preview:</strong> ${email.content_preview}</p>
+                            <p><strong>Attachments:</strong> ${email.attachment_count} (${email.attachment_types.join(', ')})</p>
+                        </div>
+                    `;
+                });
+                $('#email-details').html(emailDetailsHtml);
+                totalPages = data.total_pages;
+                currentPage = data.current_page;
+                updatePaginationControls();
+            });
+        }
+
+        function updatePaginationControls() {
+            $('#page-info').text(`Page ${currentPage}`);
+            $('#prev-page').prop('disabled', currentPage === 1);
+            $('#next-page').prop('disabled', currentPage === totalPages);
+        }
+
+        function showEmailContent(emailId) {
+            $.getJSON(`/api/email/${emailId}`, function(data) {
+                $('#modal-email-content').html(`
+                    <h2>Sender: ${data.from}</h2>
+                    <h3>Subject: ${data.subject}</h3>
+                    <p><strong>Received:</strong> ${data.date}</p>
+                    <p>${data.content}</p>
+                    <p><strong>Attachments:</strong> ${data.attachment_count} (${data.attachment_types.join(', ')})</p>
+                `);
+                $('#email-modal').css('display', 'block');
+            });
+        }
+
+        $(document).ready(function(){
+            loadDashboardData();
+
+            $('#refresh').click(function(){
+                loadDashboardData();
+            });
+
+            $('#prev-page').click(function(){
+                if (currentPage > 1) {
+                    loadEmails(--currentPage);
+                }
+            });
+
+            $('#next-page').click(function(){
+                if (currentPage < totalPages) {
+                    loadEmails(++currentPage);
+                }
+            });
+
+            $('#apply-filters').click(function(){
+                currentPage = 1; // Reset to the first page when applying filters
+                loadEmails(currentPage);
+            });
+
+            $(document).on('click', '.email-card', function(){
+                const emailId = $(this).data('email-id');
+                showEmailContent(emailId);
+            });
+
+            $('.close').click(function(){
+                $('#email-modal').css('display', 'none');
+            });
+        });
+    </script>
+</body>
+</html>

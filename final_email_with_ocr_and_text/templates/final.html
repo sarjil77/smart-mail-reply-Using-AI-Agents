@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Automation Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='aug18.1.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+    <!-- Loader for global operations -->
+    <div id="global-loader" class="loader-container" style="display: none;">
+        <div class="loader"></div>
+    </div>
+    
+    <div class="container">
+        <h1>Email Automation Dashboard</h1>
+        
+        <div class="dashboard">
+            <div class="kpi-card">
+                <h2>Total Unseen Mails</h2>
+                <p id="unseen-mails">Loading...</p>
+            </div>
+            <div class="kpi-card">
+                <h2>Pending Responses</h2>
+                <p id="pending-responses">Loading...</p>
+            </div>
+            <div class="kpi-card">
+                <h2>Completed Responses</h2>
+                <p id="completed-responses">Loading...</p>
+            </div>
+            <!-- <div class="kpi-card">
+                <h2>Error Log</h2>
+                <ul id="error-log">Loading...</ul>
+            </div> -->
+        </div>
+
+        <!-- Fetch Unseen Emails Button -->
+        <div class="fetch-unseen-emails centered-container">
+            <div id="fetch-emails-loader" class="loader" style="display: none; align-items: center; align-self: center;"></div>
+            <button id="fetch-emails-btn">Fetch Unseen Emails</button>
+        </div>
+
+        <div class="email-details-section">
+            <h2>Fetched Email Details</h2>
+            <div class="filters">
+                <input type="text" id="filter-sender" placeholder="Filter by Sender">
+                <input type="text" id="filter-subject" placeholder="Filter by Subject">
+                <button id="apply-filters">Apply Filters</button>
+            </div>
+
+            <div id="email-details" class="email-details">
+                <!-- Email details will be inserted here dynamically -->
+            </div>
+
+            <div class="pagination centered-container">
+                <button id="prev-page" disabled>Previous</button>
+                <span id="page-info">Page 1</span>
+                <button id="next-page">Next</button>
+            </div>
+        </div>
+
+        <!-- Button to Run Main.py -->
+        <div class="run-main centered-container">
+            <div id="run-main-loader" class="loader" style="display: none;"></div>
+            <button id="run-main-btn">Run Email Workflow</button>
+        </div>
+
+        <!-- New section to display Response Details -->
+        <div class="response-details-section">
+            <h2>Response Details</h2>
+            <div id="response-details" class="response-details">
+                <!-- Response details will be inserted here dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <div id="email-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modal-email-content">Loading...</div>
+        </div>
+    </div>
+
+    <script>
+    
+$(document).ready(function() {
+    function showLoader() {
+        $('#global-loader').show();
+    }
+
+    function hideLoader() {
+        $('#global-loader').hide();
+    }
+
+    function loadDashboardData() {
+        showLoader();
+        $.getJSON('/api/dashboard-data', function(data) {
+            $('#unseen-mails').text(data.unseen_mails);
+            $('#pending-responses').text(data.pending_responses);
+            $('#completed-responses').text(data.completed_responses);
+
+            let errorLogHtml = '';
+            data.error_log.forEach(function(error) {
+                errorLogHtml += `<li>${error}</li>`;
+            });
+            $('#error-log').html(errorLogHtml);
+
+            loadEmails(currentPage);
+        }).always(hideLoader);
+    }
+
+    function loadEmails(page) {
+        const senderFilter = $('#filter-sender').val();
+        const subjectFilter = $('#filter-subject').val();
+
+        $.getJSON(`/api/emails?page=${page}&sender=${senderFilter}&subject=${subjectFilter}`, function(data) {
+            let emailDetailsHtml = '';
+            data.emails.forEach(function(email) {
+                let attachmentsHtml = '';
+                if (email.attachment_count > 0) {
+                    attachmentsHtml = `
+                        <p><strong>Attachments:</strong> ${email.attachment_count} file(s)</p>
+                        <ul>
+                            ${email.attachment_types.map(type => `<li>${type}</li>`).join('')}
+                        </ul>
+                    `;
+                } else {
+                    attachmentsHtml = `<p><strong>Attachments:</strong> None</p>`;
+                }
+
+                emailDetailsHtml += `
+                    <div class="email-card" data-email-id="${email.id}">
+                        <p><strong>Sender:</strong> ${email.sender}</p>
+                        <p><strong>Subject:</strong> ${email.subject}</p>
+                        <p><strong>Received:</strong> ${email.received_date}</p>
+                        <p><strong>Content Preview:</strong> ${email.content_preview}</p>
+                        ${attachmentsHtml}
+                    </div>
+                `;
+            });
+            $('#email-details').html(emailDetailsHtml);
+            totalPages = data.total_pages;
+            currentPage = data.current_page;
+            updatePaginationControls();
+        });
+    }
+
+    function loadResponseDetails() {
+    showLoader();  // Show the loading animation or message
+    $.getJSON('/api/response-details', function(data) {
+        if (data.error) {
+            $('#response-details').html(`<p>${data.error}</p>`);
+            return;
+        }
+
+        let responseDetailsHtml = '';
+        if (Array.isArray(data.response_details)) {
+            data.response_details.forEach(function(detail) {
+                responseDetailsHtml += `
+                <div class="response-card">
+                    <p><strong>ID:</strong> ${detail.id}</p>
+                    <p><strong>Sender:</strong> ${detail.sender}</p>
+                    <p><strong>Subject:</strong> ${detail.subject}</p>
+                    <p><strong>Received:</strong> ${detail.received_date}</p>
+                    
+                    <p><strong>Email Summary:</strong> ${detail.classifier_output}</p>
+                    <p><strong>Email Response:</strong> ${detail.responder_output}</p>
+                </div>
+                `;
+            });
+        } else {
+            responseDetailsHtml = `<p>No response details available.</p>`;
+        }
+        
+        $('#response-details').html(responseDetailsHtml);
+    }).fail(function(error) {
+        $('#response-details').html(`<p>Error loading response details: ${error.responseText}</p>`);
+    }).always(function() {
+        hideLoader();  // Hide the loading animation or message
+    });
+}
+
+
+    $('#fetch-emails-btn').click(function() {
+        $('#fetch-emails-loader').show();
+        $(this).prop('disabled', true);
+
+        $.post('/api/fetch-unseen-emails', function(response) {
+            alert(response.message);
+            loadDashboardData();
+        }).fail(function(error) {
+            alert('Error fetching unseen emails: ' + error.responseText);
+        }).always(function() {
+            $('#fetch-emails-loader').hide();
+            $('#fetch-emails-btn').prop('disabled', false);
+        });
+    });
+
+    $('#run-main-btn').click(function() {
+        $('#run-main-loader').show();
+        $(this).prop('disabled', true);
+
+        $.post('/api/run-main', function(response) {
+            alert(response.message);
+            loadDashboardData();
+        }).fail(function(error) {
+            alert('Error running the email workflow: ' + error.responseText);
+        }).always(function() {
+            $('#run-main-loader').hide();
+            $('#run-main-btn').prop('disabled', false);
+        });
+    });
+
+    function updatePaginationControls() {
+        $('#page-info').text(`Page ${currentPage} of ${totalPages}`);
+        $('#prev-page').prop('disabled', currentPage === 1);
+        $('#next-page').prop('disabled', currentPage === totalPages);
+    }
+
+    $('#prev-page').click(function() {
+        if (currentPage > 1) {
+            currentPage--;
+            loadEmails(currentPage);
+        }
+    });
+
+    $('#next-page').click(function() {
+        if (currentPage < totalPages) {
+            currentPage++;
+            loadEmails(currentPage);
+        }
+    });
+
+    $('#apply-filters').click(function() {
+        loadEmails(1); // Reload emails starting from page 1 with applied filters
+    });
+
+    $(document).on('click', '.email-card', function() {
+        const emailId = $(this).data('email-id');
+        showEmailModal(emailId);
+    });
+
+    function showEmailModal(emailId) {
+        $.getJSON(`/api/email/${emailId}`, function(email) {
+            let attachmentsHtml = '';
+            if (email.attachment_count > 0) {
+                attachmentsHtml = `
+                    <p><strong>Attachments:</strong></p>
+                    <ul>
+                        ${email.attachment_types.map(type => `<li>${type}</li>`).join('')}
+                    </ul>
+                `;
+            } else {
+                attachmentsHtml = `<p><strong>Attachments:</strong> None</p>`;
+            }
+
+            $('#modal-email-content').html(`
+                <p><strong>Sender:</strong> ${email.sender}</p>
+                <p><strong>Subject:</strong> ${email.subject}</p>
+                <p><strong>Received:</strong> ${email.received_date}</p>
+                <p><strong>Content:</strong> ${email.content_preview}</p>
+                ${attachmentsHtml}
+            `);
+            $('#email-modal').show();
+        }).fail(function(error) {
+            alert('Error fetching email details: ' + error.responseText);
+        });
+    }
+
+    $('.close').click(function() {
+        $('#email-modal').hide();
+    });
+
+    // Initial load of dashboard data and emails
+    let currentPage = 1;
+    let totalPages = 1;
+    loadDashboardData();
+    loadResponseDetails();
+});
+</script>
+
+
+</body>
+</html>
