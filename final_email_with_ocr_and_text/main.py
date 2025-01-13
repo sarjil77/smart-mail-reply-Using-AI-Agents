@@ -11,7 +11,7 @@ def main():
     process_emails_from_json()
     
     # Step 2: Send the emails based on the processed results
-    json_output_path = '/data/aiuserinj/sarjil/mail_summarizer/final_email_with_ocr_and_text/all_email_results_aug_18.json'
+    json_output_path = 'your_path/mail_summarizer/final_email_with_ocr_and_text/all_email_results_aug_18.json'
     logging.info("Sending email responses...")
     process_json_and_send_emails(json_output_path)
 

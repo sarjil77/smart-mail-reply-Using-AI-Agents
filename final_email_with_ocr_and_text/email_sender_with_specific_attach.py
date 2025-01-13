@@ -16,17 +16,17 @@ known_categories = [
 
 # Define the attachment paths
 category_to_attachments = {
-    'Policy Inquiries': '/data/aiuserinj/sarjil/mail_summarizer/attachments/Policy Inquiries/sample_for_inquiry.pdf',
-    'Claims': '/data/aiuserinj/sarjil/mail_summarizer/attachments/Claims/claims.pdf',
-    'Billing and Payments': '/data/aiuserinj/sarjil/mail_summarizer/attachments/Billing and Payments/bills.png',
-    'Customer Support': '/data/aiuserinj/sarjil/mail_summarizer/attachments/Customer Support/customer support.jpeg',
-    'Renewals': '/data/aiuserinj/sarjil/mail_summarizer/attachments/Renewals/renewal.pdf',
-    'Documentation': '/data/aiuserinj/sarjil/mail_summarizer/attachments/Documentation/documentation.pdf',
-    'Quotes': '/data/aiuserinj/sarjil/mail_summarizer/attachments/Quotes/casual_photo.jpeg',
-    'Cancellations': '/data/aiuserinj/sarjil/mail_summarizer/attachments/Cancellations/spam_danger.jpeg',
-    'Compliance and Legal': '/data/aiuserinj/sarjil/mail_summarizer/attachments/Compliance and Legal/legal notice.pdf',
-    'Marketing and Promotions': '/data/aiuserinj/sarjil/mail_summarizer/attachments/Internal Communications/autoGEN_4_agents_R_paper.pdf',
-    'Internal Communications': '/data/aiuserinj/sarjil/mail_summarizer/attachments/Internal Communications/autoGEN_4_agents_R_paper.pdf'
+    'Policy Inquiries': 'your_attachment_path/Policy Inquiries/sample_for_inquiry.pdf',
+    'Claims': 'your_attachment_path/Claims/claims.pdf',
+    'Billing and Payments': 'your_attachment_path/Billing and Payments/bills.png',
+    'Customer Support': 'your_attachment_path/Customer Support/customer support.jpeg',
+    'Renewals': 'your_attachment_path/Renewals/renewal.pdf',
+    'Documentation': 'your_attachment_path/Documentation/documentation.pdf',
+    'Quotes': 'your_attachment_path/Quotes/casual_photo.jpeg',
+    'Cancellations': 'your_attachment_path/Cancellations/spam_danger.jpeg',
+    'Compliance and Legal': 'your_attachment_path/Compliance and Legal/legal notice.pdf',
+    'Marketing and Promotions': 'your_attachment_path/Internal Communications/autoGEN_4_agents_R_paper.pdf',
+    'Internal Communications': 'your_attachment_path/Internal Communications/autoGEN_4_agents_R_paper.pdf'
 }
 
 def process_json_and_send_emails(json_file_path):
@@ -55,7 +55,7 @@ def process_json_and_send_emails(json_file_path):
 
         # Prepare the email
         msg = MIMEMultipart()
-        msg['From'] = 'youremail@gmail.com'
+        msg['From'] = 'your_mail@gmail.com'
         msg['To'] = email_from
         msg['Subject'] = f"Re: {email_subject}"
         msg.add_header('In-Reply-To', email_id)
@@ -78,8 +78,8 @@ def process_json_and_send_emails(json_file_path):
         # Send the email
         smtp_server = 'smtp.gmail.com'
         smtp_port = 587
-        smtp_user = 'youremail@gmail.com'
-        smtp_password = 'wurd '  # Replace with your actual password
+        smtp_user = 'your_mail@gmail.com'
+        smtp_password = 'app specific password of your mail'  # Replace with your actual password
 
         try:
             with smtplib.SMTP(smtp_server, smtp_port) as server:

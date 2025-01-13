@@ -1,4 +1,4 @@
-# ai_agents.py
+# here there are 4 different agents for each of their defined tasks
 from crewai import Agent
 
 def create_classifier_agent(model):

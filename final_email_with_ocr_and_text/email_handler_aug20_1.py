@@ -10,6 +10,9 @@ import logging
 import boto3
 
 # your ocr credentials should be here
+aws_access_key_id = 'id of your AWS textract',
+aws_secret_access_key = 'AWS secret access key '
+
 
 #  Initialize AWS Textract client
 textract_client = boto3.client('textract', 
@@ -22,8 +25,8 @@ textract_client = boto3.client('textract',
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Paths
-attachment_save_path = "/data/aiuserinj/sarjil/mail_summarizer/handling_attachments"
-json_filepath = '/data/aiuserinj/sarjil/mail_summarizer/final_email_with_ocr_and_text/unseen_emails_info.json'  # Update with your actual JSON file path
+attachment_save_path = "your_attachment_path/mail_summarizer/handling_attachments"
+json_filepath = 'your_attachment_path/mail_summarizer/final_email_with_ocr_and_text/unseen_emails_info.json'  
 
 def extract_text_from_image(image_path):
     print(f"Extracting text from image: {image_path}")
@@ -159,7 +162,7 @@ def process_emails_from_json():
         all_email_results.append(email_result)
 
    # Save all results to a single JSON file
-    output_filepath = '/data/aiuserinj/sarjil/mail_summarizer/final_email_with_ocr_and_text/all_email_results_aug_18.json'
+    output_filepath = 'your_attachments/mail_summarizer/final_email_with_ocr_and_text/all_email_results_aug_18.json'
     print('Saving all results to:', output_filepath)
     try:
         with open(output_filepath, 'w') as json_file:

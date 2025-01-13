@@ -5,14 +5,14 @@ import json
 import os
 
 # Email credentials
-email_user = "xyz@gmail.com"
-email_pass = "958 bolt a champion"
+email_user = "your_mail@gmail.com"
+email_pass = "app specific password"
 
 # File path for storing JSON data
-json_file_path = '/data/aiuserinj/sarjil/mail_summarizer/final_email_with_ocr_and_text/unseen_emails_info.json'
+json_file_path = 'your_attachments_path/mail_summarizer/final_email_with_ocr_and_text/unseen_emails_info.json'
 
 # Attachment save paths
-attachment_save_path = "/data/aiuserinj/sarjil/mail_summarizer/handling_attachments"
+attachment_save_path = "your_attachments_path/mail_summarizer/handling_attachments"
 
 # Initialize IMAP client
 def init_imap():

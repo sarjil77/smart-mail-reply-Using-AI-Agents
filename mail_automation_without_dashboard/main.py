@@ -1,12 +1,17 @@
-
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 from Email_handler import login, logout, process_email_with_attachments
 from Sending_mail import process_json_and_send_emails
 import logging
 import warnings
-import os 
+# import torch
 
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "2"
+# os.environ['CUDA_LAUNCH_BLOCKING'] = '1'
+
+# device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
+
+# os.environ["CUDA_VISIBLE_DEVICES"] = "2"
 
 warnings.filterwarnings('ignore', category=UserWarning)
 warnings.filterwarnings('ignore', category=DeprecationWarning)
