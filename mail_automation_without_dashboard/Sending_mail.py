@@ -55,7 +55,7 @@ def process_json_and_send_emails(json_file_path):
 
         # Prepare the email
         msg = MIMEMultipart()
-        msg['From'] = 'sarjiltestmail@gmail.com'
+        msg['From'] = 'testmail@gmail.com'
         msg['To'] = email_from
         msg['Subject'] = f"Re: {email_subject}"
         msg.add_header('In-Reply-To', email_id)
@@ -78,7 +78,7 @@ def process_json_and_send_emails(json_file_path):
         # Send the email
         smtp_server = 'smtp.gmail.com'
         smtp_port = 587
-        smtp_user = 'sarjiltestmail@gmail.com'
+        smtp_user = 'testmail@gmail.com'
         smtp_password = 'hlga gpyt lilq obrd'  # Replace with your actual password
 
         try:
