@@ -16,17 +16,17 @@ known_categories = [
 
 # Define the attachment paths
 category_to_attachments = {
-    'Policy Inquiries': 'your_attachment_path/Policy Inquiries/sample_for_inquiry.pdf',
-    'Claims': 'your_attachment_path/Claims/claims.pdf',
-    'Billing and Payments': 'your_attachment_path/Billing and Payments/bills.png',
-    'Customer Support': 'your_attachment_path/Customer Support/customer support.jpeg',
-    'Renewals': 'your_attachment_path/Renewals/renewal.pdf',
-    'Documentation': 'your_attachment_path/Documentation/documentation.pdf',
-    'Quotes': 'your_attachment_path/Quotes/casual_photo.jpeg',
-    'Cancellations': 'your_attachment_path/Cancellations/spam_danger.jpeg',
-    'Compliance and Legal': 'your_attachment_path/Compliance and Legal/legal notice.pdf',
-    'Marketing and Promotions': 'your_attachment_path/Internal Communications/autoGEN_4_agents_R_paper.pdf',
-    'Internal Communications': 'your_attachment_path/Internal Communications/autoGEN_4_agents_R_paper.pdf'
+    'Policy Inquiries': '../attachments/Policy Inquiries/sample_for_inquiry.pdf',
+    'Claims': '../attachments/Claims/claims.pdf',
+    'Billing and Payments': '../attachments/Billing and Payments/bills.png',
+    'Customer Support': '../attachments/Customer Support/customer support.jpeg',
+    'Renewals': '../attachments/Renewals/renewal .pdf',
+    'Documentation': '../attachments/Documentation/documentation.pdf',
+    'Quotes': '../attachments/Quotes/casual_photo.jpeg',
+    'Cancellations': '../attachments/Cancellations/spam_danger.jpeg',
+    'Compliance and Legal': '../attachments/Compliance and Legal/legal notice.pdf',
+    'Marketing and Promotions': '../attachments/Internal Communications/autoGEN_4_agents_R_paper.pdf',
+    'Internal Communications': '../attachments/Internal Communications/autoGEN_4_agents_R_paper.pdf'
 }
 
 def process_json_and_send_emails(json_file_path):

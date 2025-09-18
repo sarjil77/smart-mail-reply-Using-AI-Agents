@@ -7,8 +7,8 @@ from unseen_count_Info import update_email_data
 app = Flask(__name__)
 
 # paths for JSON files
-FETCHED_EMAIL_JSON_PATH = 'your_attachment_path/mail_summarizer/final_email_with_ocr_and_text/unseen_emails_info.json'
-RESPONSE_JSON_PATH = 'your_attachment_path/mail_summarizer/final_email_with_ocr_and_text/all_email_results_aug_18.json'
+FETCHED_EMAIL_JSON_PATH = '../data/unseen_emails_info.json'
+RESPONSE_JSON_PATH = '../data/all_email_results_aug_18.json'
 
 # loafing the json
 def load_json_data(file_path):

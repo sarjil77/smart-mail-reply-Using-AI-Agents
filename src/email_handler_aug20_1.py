@@ -9,9 +9,10 @@ from ai_agents import create_classifier_agent, create_image_summarizer_agent, cr
 import logging
 import boto3
 
-# your ocr credentials should be here
-aws_access_key_id = 'id of your AWS textract',
-aws_secret_access_key = 'AWS secret access key '
+# AWS credentials - Update these with your actual credentials
+# For production, use environment variables or AWS credentials file
+aws_access_key_id = 'your_aws_access_key_id'
+aws_secret_access_key = 'your_aws_secret_access_key'
 
 
 #  Initialize AWS Textract client
@@ -25,8 +26,8 @@ textract_client = boto3.client('textract',
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Paths
-attachment_save_path = "your_attachment_path/mail_summarizer/handling_attachments"
-json_filepath = 'your_attachment_path/mail_summarizer/final_email_with_ocr_and_text/unseen_emails_info.json'  
+attachment_save_path = "../handling_attachments"
+json_filepath = '../data/unseen_emails_info.json'  
 
 def extract_text_from_image(image_path):
     print(f"Extracting text from image: {image_path}")
